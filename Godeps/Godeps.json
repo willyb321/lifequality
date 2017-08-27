@@ -1,0 +1,49 @@
+{
+	"ImportPath": "github.com/willyb321/lifequality",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/AlecAivazis/survey",
+			"Comment": "v1.2.5",
+			"Rev": "73fd4d7829877a72e03dbb42f84ed383fbbc5fa0"
+		},
+		{
+			"ImportPath": "github.com/AlecAivazis/survey/core",
+			"Comment": "v1.2.5",
+			"Rev": "73fd4d7829877a72e03dbb42f84ed383fbbc5fa0"
+		},
+		{
+			"ImportPath": "github.com/AlecAivazis/survey/terminal",
+			"Comment": "v1.2.5",
+			"Rev": "73fd4d7829877a72e03dbb42f84ed383fbbc5fa0"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Comment": "v0.0.9-6-gad5389d",
+			"Rev": "ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Comment": "v0.0.2",
+			"Rev": "fc9e8d8ef48496124e79ae0df75490096eccf6fe"
+		},
+		{
+			"ImportPath": "github.com/mgutz/ansi",
+			"Rev": "9520e82c474b0a04dd04f8a40959027271bab992"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/go-wordwrap",
+			"Rev": "ad45545899c7b13c020ea92b2072220eefad42b8"
+		},
+		{
+			"ImportPath": "github.com/urfave/cli",
+			"Comment": "v1.19.1-65-g2903b76",
+			"Rev": "2903b76a128edb2f5c14e77c1fc52edc12901702"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "d8f5ea21b9295e315e612b4bcf4bedea93454d4d"
+		}
+	]
+}
