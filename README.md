@@ -3,8 +3,12 @@
 
 
 ## Description
+Check life quality in a city, courtesy of [Teleport](https://teleport.org)
 
 ## Usage
+```bash
+lifequality in "City"
+```
 
 ## Install
 
