@@ -6,18 +6,23 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 
 	"github.com/AlecAivazis/survey"
-	wordwrap "github.com/mitchellh/go-wordwrap"
+	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
 )
 
 // CmdIn is used like`in <place>`
 func CmdIn(c *cli.Context) error {
 	// Write your code here
-	fmt.Println("Starting lookup for ", c.Args().Get(0))
-	searchLifeData(string(c.Args().Get(0)))
+	if string(c.Args().Get(0)) != "" {
+		fmt.Println("Starting lookup for", c.Args().Get(0))
+		searchLifeData(string(c.Args().Get(0)))
+	} else {
+		fmt.Println("Enter a city to look up.")
+	}
 	return nil
 }
 
@@ -57,7 +62,7 @@ func searchLifeData(search string) {
 				if city == v.MatchingFullName {
 					printLifeData(v.Embedded.CityItem.Embedded.CityUrbanArea.Embedded.UaScores.Categories,
 						v.Embedded.CityItem.Embedded.CityUrbanArea.Embedded.UaScores.Summary,
-						strconv.FormatFloat(v.Embedded.CityItem.Embedded.CityUrbanArea.Embedded.UaScores.TeleportCityScore, 'f', 1, 64))
+						v.Embedded.CityItem.Embedded.CityUrbanArea.Embedded.UaScores.TeleportCityScore)
 					break
 				}
 			}
@@ -65,12 +70,21 @@ func searchLifeData(search string) {
 	}
 }
 
-func printLifeData(scores lifeScores, summary, cityScore string) {
+func printLifeData(scores lifeScores, summary string, cityScore float64) {
+	tableHeaders := []string{"Name", "Score"}
+	var tableData [][]string
 	for _, v := range scores {
-		fmt.Printf("%s: %s / 10\n", v.Name, strconv.FormatFloat(v.ScoreOutOf10, 'f', 1, 64))
+		tableData = append(tableData, []string{v.Name, string(strconv.FormatFloat(v.ScoreOutOf10, 'f', 1, 64))})
 	}
-	fmt.Printf("Summary:")
+
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader(tableHeaders)
+	table.SetFooter([]string{"Teleport Score", string(strconv.FormatFloat(cityScore, 'f', 1, 64))})
+	table.AppendBulk(tableData)
+	table.Render()
+	// fmt.Printf("Summary:")
 	// summary = strings.Replace(summary, "\n", "", -1)
-	summary = wordwrap.WrapString(summary, 3)
-	fmt.Println(summary)
+	// summary = wordwrap.WrapString(summary, 3)
+	// cityScore, _ = strconv.ParseFloat(cityScore, 64)
+	// fmt.Println(summary)
 }
